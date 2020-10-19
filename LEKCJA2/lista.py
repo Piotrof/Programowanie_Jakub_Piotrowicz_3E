@@ -1,7 +1,6 @@
 import os
 import msvcrt as m
 
-
 def menu():
     print("Wybierz co chcesz zrobić:")
     print("1.Tworzenie listy")
@@ -16,12 +15,16 @@ def cont():
     input("Naciśnij klawisz aby kontynuować.")
 
 
+def refresh():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 def create_table(list):
     print("Ile elementów ma zawierać lista?")
     n_of_elements = int(input())
 
     for i in range (n_of_elements):
-        list.append(int(input(f"Wprowadź {i+1} element.")))
+        list.append(int(input(f"Wprowadź {i+1} element:")))
 
 
 def show_elements(list):
@@ -36,11 +39,11 @@ def sort_list(list):
         print(f"Posortowana lista wygląda tak: {list_sorted}")
     elif choice.upper() == "POSORTUJ":
         list.sort()
-
+        print("Posortowano listę")
 
 def delete_element(list):
     choice = input("Który element chcesz usunąć?")
-    list.pop(choice)
+    del list[choice-1]
 
 
 def list_info(list):
@@ -62,15 +65,25 @@ while(True):
     if menu_choice == 1:
         create_table(list)
         cont()
+        refresh()
+        menu()
     elif menu_choice == 2:
         show_elements(list)
         cont()
+        refresh()
+        menu()
     elif menu_choice == 3:
         sort_list(list)
         cont()
+        refresh()
+        menu()
     elif menu_choice == 4:
         list_info(list)
         cont()
+        refresh()
+        menu()
     elif menu_choice == 5:
         delete_element(list)
         cont()
+        refresh()
+        menu()
